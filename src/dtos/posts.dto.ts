@@ -1,5 +1,5 @@
-import { IsString, IsUUID, IsOptional, MaxLength, MinLength, IsDateString, IsEnum, IsInt, Min, Max, IsNotEmpty } from 'class-validator';
-import { Expose, Transform } from 'class-transformer';
+import { IsString, IsUUID, IsOptional, MaxLength, MinLength, IsDateString, IsNotEmpty } from 'class-validator';
+import { Expose } from 'class-transformer';
 
 // Create DTO
 export class CreatePostDto {
@@ -52,7 +52,7 @@ export class UpdatePostDto {
 export class PostResponseDto {
   @IsUUID()
   @Expose()
-  id: string;
+  _id: string;
 
   @IsString()
   @Expose()

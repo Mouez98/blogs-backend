@@ -1,5 +1,5 @@
 export interface IPost {
-  id: string;
+  _id: string;
   title: string;
   content: string;
   author: string;
@@ -7,10 +7,10 @@ export interface IPost {
   updated_at?: Date;
 }
 
-export type PostCreateInput = Omit<IPost, 'id' | 'created_at' | 'updated_at'>;
+export type PostCreateInput = Omit<IPost, '_id' | 'created_at' | 'updated_at'>;
 
-export type PostUpdateInput = Partial<Omit<IPost, 'id' | 'created_at' | 'updated_at'>>;
+export type PostUpdateInput = Partial<Omit<IPost, '_id' | 'created_at' | 'updated_at'>>;
 
 export interface PostResponse extends IPost {
-  id: string;
+  _id: string;
 }

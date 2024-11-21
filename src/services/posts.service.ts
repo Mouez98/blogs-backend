@@ -1,6 +1,5 @@
 import { Service } from 'typedi';
 import { HttpException } from '@exceptions/httpException';
-import uuidv4 from 'uuid';
 
 import { PostModel } from '../models/posts.model';
 import { IPost, PostCreateInput, PostResponse } from '../interfaces/posts.intefaces';
@@ -20,18 +19,18 @@ export class PostService {
   }
 
   public async createPost(postData: PostCreateInput): Promise<PostResponse> {
-    const createPostData: IPost = await PostModel.create({ ...postData, id: uuidv4 });
+    const createPostData: IPost = await PostModel.create({ ...postData });
 
     return createPostData;
   }
 
   public async updatePost(postId: string, postData: IPost): Promise<IPost> {
-    if (postData.id) {
-      const findPost: IPost = await PostModel.findOne({ id: postData.id });
-      if (findPost && findPost.id != postId) throw new HttpException(409, `This id ${postData.id} already exists`);
+    if (postData._id) {
+      const findPost: IPost = await PostModel.findOne({ _id: postData._id });
+      if (findPost && findPost._id != postId) throw new HttpException(409, `This id ${postData._id} already exists`);
     }
 
-    const updatePostById: IPost = await PostModel.findByIdAndUpdate(postId, { postData });
+    const updatePostById: IPost = await PostModel.findOneAndUpdate({ _id: postId }, postData, { new: true });
     if (!updatePostById) throw new HttpException(409, "Post doesn't exist");
 
     return updatePostById;
