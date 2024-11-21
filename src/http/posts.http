@@ -1,0 +1,34 @@
+# baseURL
+@baseURL = http://localhost:3000
+
+###
+# Find All Posts
+GET {{ baseURL }}/posts
+
+###
+# Find Post By Id
+GET {{ baseURL }}/posts/1
+
+###
+# Create Post
+POST {{ baseURL }}/posts
+Content-Type: application/json
+
+{
+    "title": "Title of the post ",
+    "content": "Content of the post"
+}
+
+###
+# Modify Post By Id
+PUT {{ baseURL }}/posts/1
+Content-Type: application/json
+
+{
+    "title": "Title of the post ",
+    "content": "Content of the post"
+}
+
+###
+# Delete Post By Id
+DELETE {{ baseURL }}/posts/1
